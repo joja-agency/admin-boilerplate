@@ -1,0 +1,1489 @@
+@import "react-select.min.css";
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,700);
+
+$spriteUrl: "../../../frontend/assets/images/sprite.png";
+
+$menuWidth: 230px;
+$topBarHeight: 55px;
+$mobileBr: 768px;
+$tabletBr: 1200px;
+
+$error: #c34533;
+
+$background: #e7eaec;
+$formBackground: #EFEFEE;
+$lightBackground: #f2f2f2;
+
+$darkPrimary: #415a69;
+$primary: #6C8494;
+$lightPrimary: #d4dde1;
+$lighterPrimary: #e0eaee;
+$lightBlue: #f4f7f9;
+$lightGrey: #CBCBCB;
+$borderColor: #a8b5bd;
+
+$accentColor: #7a0f2a;
+$lightAccentColor: #c63a5e;
+$lighterAccentColor: #e96d8a;
+
+$secondaryAccent: #FFC000;
+
+$breakColor: #FFBF42;
+$fontColor: #2f3137;
+$lightFontColor: #efefef;
+$borderRadius: 4px;
+$dashTimelineHeight: 110px;
+
+html, body {
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+body {
+  background: $background;
+}
+#root{
+  font-family: "Open Sans", "Lucida Grande", "Lucida Sans Unicode", Verdana, Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  color: $fontColor;
+  height: 100%;
+}
+.container{
+  height: 100%;
+  background: $background;
+}
+*:focus {
+  outline: 0;
+}
+*:disabled{
+  color: #CCC;
+}
+h1, h2{
+  font-weight: normal;
+  color: $fontColor;
+}
+h3{
+  text-transform: uppercase;
+  padding: 10px 0;
+  margin: 0;
+  font-size: 14px;
+  color: $fontColor;
+}
+h4{
+  margin-bottom: 5px;
+  color: $fontColor;
+}
+h5{
+  margin-bottom: 5px;
+  color: $fontColor;
+}
+label{
+  display: block;
+  margin-top: 20px;
+  font-size: 15px;
+  color: #6b6a6a;
+  &.small{
+    margin-top: 5px;
+    font-size: 12px;
+  }
+  &.large{
+    font-size: 20px;
+    margin-top: 50px;
+  }
+}
+
+
+// for devtools
+li label{
+  margin-top: 0px;
+}
+
+
+.loader{
+  width: 20px;
+  height: 20px;
+  clear: both;
+  display: inline-block;
+
+  border: 5px $darkPrimary solid;
+  border-top: 5px rgba(0, 0, 0, 0) solid;
+  border-radius: 50%;
+  -webkit-animation: spCircRot .9s infinite linear;
+  animation: spCircRot 0.9s infinite linear;
+}
+@-webkit-keyframes spCircRot {
+  from { -webkit-transform: rotate(0deg); }
+  to { -webkit-transform: rotate(359deg); }
+}
+@keyframes spCircRot {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(359deg); }
+}
+@mixin dotted($background) {
+  //padding: 2.25em 1.6875em;
+  background-color: $background;
+  background-image: -webkit-repeating-radial-gradient(center center, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9) 1px, transparent 1px, transparent 100%);
+  background-image: -moz-repeating-radial-gradient(center center, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9) 1px, transparent 1px, transparent 100%);
+  background-image: -ms-repeating-radial-gradient(center center, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9) 1px, transparent 1px, transparent 100%);
+  background-image: repeating-radial-gradient(center center, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9) 1px, transparent 1px, transparent 100%);
+  -webkit-background-size: 3px 3px;
+  -moz-background-size: 3px 3px;
+  background-size: 3px 3px;
+}
+
+@mixin stripped {
+  background: repeating-linear-gradient(
+                  135deg,
+
+                  rgba(241, 241, 241, 0.44) 2px,
+                  rgba(224, 224, 224, 0.48) 6px,
+                  rgba(82, 82, 82, 0.31) 12px
+  );
+}
+
+
+a{
+  text-decoration: none;
+  color: $accentColor;
+}
+input{
+  position: relative;
+  font-size: 14px;
+  border-radius: 0px;
+  border: 2px solid $lightPrimary;
+  line-height: 2.3;
+  padding: 5px 10px 2px 10px;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 4px 4px 0 0;
+  &:focus {
+    outline: none;
+    border-color: $primary !important;
+  }
+  &:hover {
+    border-color: darken($lightPrimary,15%);
+  }
+  &.small{
+    font-size: 13px;
+    line-height: 2.1;
+    padding: 3px 8px 1px 8px;
+  }
+}
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: rgba(0, 0, 0, 0.5);
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: rgba(0, 0, 0, 0.5);
+}
+:-ms-input-placeholder { /* IE 10+ */
+  color: rgba(0, 0, 0, 0.5);
+}
+textarea{
+  font-size: 14px;
+  border-radius: 0px;
+  border: 2px solid $lightPrimary;
+  padding: 6px 10px 3px 10px;
+  padding: 6px 10px 3px 10px;
+  width: 100% !important;
+  box-sizing: border-box;
+  &:focus {
+    outline: none;
+    border-color: $primary !important;
+  }
+  &:hover {
+    border-color: darken($lightPrimary,15%);
+  }
+}
+button, .button{
+  display: inline-block;
+  background: $accentColor;
+  color: #ffffff;
+  //text-shadow: 0 1px rgba(0, 0, 0, 0.4);
+  margin: 4px 4px 3px 0;
+  padding: 7px 17px;
+  //text-transform: uppercase;
+  line-height: 1.6;
+  text-align: center;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 15px;
+  border:0;
+  transition: all 0.2s ease-in-out;
+
+  &:hover{
+    background: $lightAccentColor;
+  }
+  &:active {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.55);
+  }
+  &:disabled{
+    background: #CCC !important;
+    color: #FFF !important;
+    text-shadow: none;
+    cursor: inherit;
+    opacity: 0.6;
+    &:hover{
+      background: #CCC;
+      box-shadow: none;
+    }
+  }
+  &.small{
+    //max-width: 80px;
+    padding: 7px 10px;
+    line-height: 1;
+    text-transform: none;
+    font-size: 13px;
+  }
+  &.secondary{
+    background-color: $lightPrimary;
+    color: #616b71;
+    &:hover{
+      color: #FFF;
+      background-color: #B4C9D0;
+    }
+    &:active {
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+    }
+  }
+}
+.cancelButton{
+  display: inline-block;
+  background: transparent;
+  color: $primary;
+  margin: 3px 4px 0 0;
+  padding: 7px 17px;
+  text-transform: lowercase;
+  line-height: 1.8;
+  text-align: center;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 15px;
+  border:0;
+  transition: all 0.05s ease-in-out;
+  &:hover{
+    color: $darkPrimary;
+  }
+}
+.textButton{
+  display: inline-block;
+  width: 100px;
+  background: transparent;
+  margin: 3px 4px 0 0;
+  padding: 9px 0;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: none;
+  font-weight: 500;
+  font-size: 13px;
+  border:0;
+  color: #626971;
+  transition: all 0.2s ease-in-out;
+  &:hover{
+    background: transparent;
+    text-decoration: underline;
+    box-shadow: none;
+  }
+  &:active {
+    box-shadow: none;
+  }
+  &.disabled{
+    background: #fdfdfd;
+    box-shadow: none;
+    color: #b4bbc3;
+    cursor: inherit;
+    &:hover{
+      background: inherit;
+      box-shadow: none;
+    }
+  }
+  &.small{
+    max-width: 80px;
+    padding: 7px 0;
+  }
+}
+.textLink{
+  cursor: pointer;
+  &:hover{
+    text-decoration: underline;
+  }
+}
+.loginWrap{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+  .logo{
+    padding: 10px 0px 10px 10px;
+  }
+}
+.loginForm{
+  width: 260px;
+  margin-top: -50px;
+  padding: 20px;
+  .loginError{
+    text-align: center;
+    color: $error;
+  }
+  .loginButton {
+    margin-top: 10px;
+    width: 100%;
+  }
+  .loginLogo{
+    font-size: 50px;
+    text-align: center;
+    color: $primary;
+    padding-bottom: 10px;
+  }
+  .loginInput{
+    margin: 5px 0px;
+  }
+}
+.loadingData{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+.content {
+  height: 100%;
+  padding-top: $topBarHeight;
+
+  .mainMenu {
+    width: $menuWidth;
+    position: fixed;
+    height: 100vh;
+    background: $primary;
+    padding: 0 0 0 0;
+    box-sizing: border-box;
+    z-index: 10;
+    .menuLink {
+      padding: 7px 7px 7px 22px;
+      display: flex;
+      align-items: center;
+      color: white;
+      min-height: 32px;
+      font-size: 14px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+      transition: all 0.09s ease-in-out;
+      &:hover {
+        background: #7b97a9;
+        //color: #000;
+      }
+    }
+    .menuLinks{
+      overflow: auto;
+      max-height: calc(100vh - #{$topBarHeight});
+    }
+  }
+  .subContent {
+    flex: auto;
+    width: 100%;
+    box-sizing: border-box;
+    min-height: calc(100vh - #{$topBarHeight});
+  }
+  &.menuOpen{
+    .subContent{
+      padding-left: $menuWidth;
+    }
+  }
+}
+.appContent {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  min-width: 400px;
+  .listButtons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    margin: 30px;
+    .selectButton{
+      margin-right: 20px;
+      width: 20px;
+      height: 20px;
+      border: 1px solid $lighterPrimary;
+      cursor: pointer;
+      border-radius: 20px;
+      &:hover{
+        border-color: $accentColor;
+        background-color: #f3f2f7;
+      }
+    }
+    .deleteButton{
+      background-position: -226px -165px;
+      background-color: #F6F5FA;
+      padding: 5px 8px;
+      border: 1px solid #CCC;
+      border-bottom-right-radius: 3px;
+      border-top-right-radius: 3px;
+      &:hover{
+        background-position: -296px -165px;
+        background-color: #f3f2f7;
+      }
+    }
+    .copyButton{
+      background-position: -188px -164px;
+      background-color: #F6F5FA;
+      padding: 5px 8px;
+      border: 1px solid #CCC;
+      border-right: none;
+      border-bottom-left-radius: 3px;
+      border-top-left-radius: 3px;
+      &:hover{
+        background-position: -258px -164px;
+        background-color: #f3f2f7;
+      }
+    }
+
+  }
+  .list {
+    .listItem {
+      display: flex;
+      align-items: center;
+      position: relative;
+      min-height: 35px;
+      margin: 0px 0px;
+      border: 1px solid rgba(180, 180, 180, 0.35);
+      font-size: 12px;
+      color: #595959;
+      background-color: #FFFFFF;
+      transition: all 0.12s ease-in-out;
+      cursor: pointer;
+      padding: 0 0 0 10px;
+      .item {
+        padding: 5px;
+        min-width: 200px;
+        max-width: 200px;
+        &.lowContrast {
+          opacity: 0.7;
+        }
+      }
+      .itemName {
+        min-width: 140px;
+        color: $fontColor;
+        padding: 5px;
+      }
+      .itemSelect {
+        margin: 10px;
+        min-width: 20px;
+        height: 20px;
+        border: 1px solid $lighterPrimary;
+        cursor: pointer;
+        border-radius: 20px;
+      }
+      .dragHandle {
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+      .listItemControls {
+        display: flex;
+        margin-left: auto;
+        margin-right: 10px;
+        align-items: center;
+        .listItemControl {
+          margin: 10px;
+          cursor: pointer;
+          color: $fontColor;
+          &:hover {
+            color: $accentColor;
+          }
+        }
+      }
+      &:hover {
+        background-color: #e9f3f7;
+        border-color: rgba(108, 132, 148, 0.21);
+        color: #000;
+        //font-size: 14px;
+      }
+      &.disabled {
+        background: #efefef;
+
+        &:hover {
+          background: #efefef;
+          border-color: #bfbfbf;
+        }
+      }
+    }
+  }
+  .clickEnterItem{
+    cursor: pointer;
+    &:hover{
+      border-color: $accentColor;
+      background-color: #f4fff8;
+    }
+  }
+  .createButtons{
+    text-align: right;
+    margin-bottom: 40px;
+  }
+}
+.listButton {
+  background: url($spriteUrl);
+  background-repeat: no-repeat;
+  width: 25px;
+  height: 25px;
+  display: inline-block;
+  cursor: pointer;
+  margin: 0 7px;
+}
+.deleteButton {
+  background-position: -233px -168px;
+  &:hover {
+    background-position: -303px -168px;
+  }
+}
+.copyButton {
+  background-position: -195px -166px;
+  &:hover {
+    background-position: -265px -166px;
+  }
+}
+.editButton {
+  background-position: -159px -168px;
+  &:hover {
+    background-position: -334px -168px;
+  }
+}
+.editTitleButton {
+  background-position: -277px -216px;
+  &:hover {
+    background-position: -277px -249px;
+  }
+}
+.saveButtonForm {
+  min-width: 60px;
+  color: #FFF;
+  text-align: center;
+  line-height: 23px;
+  background: $accentColor;
+  border-radius: $borderRadius;
+  padding: 0 5px 0 2px;
+  display: flex;
+  align-items: center;
+  &:hover {
+    background-color: $lightAccentColor;
+  }
+  .icon {
+    background-position: -316px -217px;
+    margin: 0 3px 0 0;
+  }
+}
+.cancelButtonForm {
+  @extend .saveButtonForm;
+  background: #b1b1b1;
+  &:hover {
+    background-color: #c2c2c2;
+  }
+  .icon {
+    background-position: -354px -217px;
+    margin: 0 3px 0 0;
+    opacity: 0.8;
+  }
+}
+.saveButtonFormIcon {
+  background-position: -316px -217px;
+  &:hover {
+    background-position: -316px -250px;
+  }
+}
+.formItemControls {
+  margin-left: 10px;
+  padding-top: 4px;
+  display: flex;
+}
+.listLabel {
+  margin-right: 10px;
+  font-size: 12px;
+}
+
+.emptyPageNote{
+  border: 3px dashed $lightGrey;
+  color: $lightGrey;
+  font-size: 20px;
+  margin: 50px;
+  padding: 70px;
+  text-align: center;
+}
+.contextMenu{
+  //height: 100px;
+  background: $lightPrimary;
+  position: relative;
+
+  .contextTitle{
+    padding: 30px 40px;
+    font-size: 30px;
+    color: $primary;
+  }
+  .contextMenuItems{
+    display: flex;
+    padding-left: 24px;
+    background: #f4f4f4;
+    .contextMenuItem{
+      padding: 8px 20px;
+      text-transform: uppercase;
+      font-size: 16px;
+      color: $primary;
+      cursor: pointer;
+      &:hover{
+        color: $lighterAccentColor;
+      }
+      &.active{
+        color: $accentColor;
+      }
+    }
+  }
+
+}
+.newButtonComponent{
+  position: absolute;
+  top: 159px;
+  right: 10%;
+  .newButton{
+    width: 50px;
+    height: 50px;
+    background: $accentColor;
+    border-radius: 35px;
+    text-align: center;
+    color: white;
+    font-size: 35px;
+    line-height: 45px;
+    cursor: pointer;
+    margin: 0 auto;
+    transition: 0.15s all ease-in-out;
+    &:hover{
+      background: $lightAccentColor;
+    }
+  }
+  .newButtonTitle{
+    color: $accentColor;
+    margin-bottom: 15px;
+  }
+}
+.newUserRoleButton{
+  position: absolute;
+  top: 159px;
+  right: 10%;
+  min-width: 150px;
+  transform: translateX(-200px);
+  .newButtonComponent{
+    top: 0;
+    right: 0;
+  }
+}
+.dropdown{
+  visibility: hidden;
+  position: absolute;
+  background: $darkPrimary;
+  .dropdownItem{
+    font-size: 15px;
+    padding: 12px 30px 12px 40px;
+    display: block;
+    cursor: pointer;
+    color: $lightFontColor;
+    &:hover{
+      color: $lighterAccentColor;
+    }
+  }
+}
+.topBar{
+  position: fixed;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: $darkPrimary;
+  height: $topBarHeight;
+  color: #FFFFFF;
+  width: 100vw;
+  z-index: 50;
+  .leftSide{
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    .logo{
+      padding: 3px 0 0 30px;
+      img{
+        height: 25px;
+      }
+    }
+    .menuIcon{
+      width: 20px;
+      cursor: pointer;
+      padding: 10px;
+    }
+  }
+  .userSection{
+    position: relative;
+    padding: 10px 10px 10px 10px;
+    margin-right: 20px;
+    white-space: pre;
+    &:hover{
+      .dropdownUser{
+        visibility: visible;
+      }
+    }
+    .userName{
+      color: #dbf2f5;
+      font-size: 15px;
+      margin: 8px 10px 4px 10px;
+      text-align: right;
+      display: inline-block;
+      cursor: pointer;
+    }
+    .userAvatar{
+      width: 35px;
+      height: 35px;
+      display: inline-block;
+      vertical-align: middle;
+      border-radius: 30px;
+      margin: -6px 10px 0 0;
+      overflow: hidden;
+      border: 2px solid $primary;
+      img{
+        width: 35px;
+        height: 35px;
+      }
+
+    }
+    .dropdownUser{
+      top:99%;
+      right: 0;
+      text-align: right;
+      width: 200px;
+
+    }
+    .caretDown{
+      display: inline-block;
+      width: 15px;
+      vertical-align: middle;
+      margin-top: -2px;
+    }
+  }
+  .settingsMenu{
+    height: $topBarHeight;
+    display: flex;
+    align-items: center;
+    position: relative;
+    &:hover{
+      .dropdownSettings{
+        visibility: visible;
+      }
+    }
+    a{
+      padding-left: 20px !important;
+      display: block;
+    }
+    .settingsLink{
+    }
+    .dropdownSettings{
+      position: absolute;
+      top:$topBarHeight;
+      left: 0;
+      width: 200px;
+      background: $darkPrimary;
+    }
+  }
+  .shade{
+    display: none;
+  }
+}
+.formWrap{
+  position: fixed;
+  top:0;
+  left:0;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  display: flex;
+  overflow: auto;
+  align-items: baseline;
+  justify-content: center;
+}
+.form{
+  flex: none;
+  width: calc(100% - 20px);
+  max-width: 600px;
+  box-sizing: border-box;
+  background: $formBackground;
+  padding: 20px;
+  z-index: 100;
+  margin: 110px 10px 100px 10px;
+  //max-height: 98vh;
+  //overflow: auto;
+  label{
+    display: block;
+    margin-top: 10px;
+  }
+  .error{
+    color: $error !important;
+    border-color: $error !important;
+    font-size: 12px;
+  }
+  .saveCancelButtons{
+    margin-top: 20px;
+    text-align: right;
+  }
+}
+.error{
+  border-color: $error !important;
+}
+.modal{
+  position: fixed;
+  top:0;
+  left:0;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .modalForm{
+    min-width: 400px;
+    padding: 20px;
+    background: $lightBackground;
+    z-index: 101;
+  }
+  .buttons{
+    margin-top: 40px;
+    text-align: right;
+  }
+}
+.shade{
+  position: fixed;
+  cursor: pointer;
+  background: rgba(0, 0, 0, 0.56);
+  top:0;
+  bottom: 0;
+  left:0;
+  right: 0;
+  z-index: 99;
+}
+.Select{
+  margin: 4px 4px 0 0;
+  line-height: 2.5;
+  &.is-disabled{
+    opacity: 0.8;
+    .Select-control{
+      &:hover{
+        border-color: $lightPrimary;
+      }
+    }
+  }
+  &.is-focused{
+    .Select-control{
+      outline: none;
+      border: 2px solid $primary !important;
+    }
+  }
+  .Select-value-label{
+    color: $fontColor;
+  }
+  .Select-control{
+    border-radius: 0px;
+    border: 2px solid $lightPrimary;
+    min-height: 43px;
+    .Select-value{
+      line-height: 43px;
+    }
+    &:hover{
+      border-color: darken($lightPrimary,15%);
+    }
+  }
+  .Select-input>input{
+    height: 45px;
+  }
+  .Select-value, .Select-placeholder{
+    line-height: 45px;
+  }
+  &.Select--multi .Select-value{
+    border-width: 2px;
+    line-height: 2.2 !important;
+  }
+  .Select-menu-outer{
+    border: 2px solid darken($lightPrimary,15%);
+    line-height: 40px;
+  }
+  .Select-menu-outer {
+    max-height: 214px;
+  }
+  .Select-menu{
+    max-height: 210px;
+  }
+  .Select-option{
+    line-height: 30px;
+  }
+  input:hover{
+    border: none;
+
+  }
+}
+.notFound{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - #{$topBarHeight});
+  font-size: 30px;
+  color: $primary;
+}
+.dividerLine{
+  width: 95%;
+  border-top:1px solid rgba(108, 132, 148, 0.47);
+  margin-top: 5px;
+}
+.userGroups, .employeeDepartments{
+  margin-top: 40px;
+
+  .userGroup, .employeeDepartment {
+
+
+  }
+}
+.paging{
+  display: flex;
+  align-self: center;
+  justify-content: center;
+  margin-top: 40px;
+  color: $fontColor;
+  font-size: 14px;
+  .pagingItem{
+    padding: 5px 10px;
+    cursor: pointer;
+    &:hover{
+      background: $lightAccentColor;
+    }
+  }
+  .current{
+    background: darken($lightAccentColor, 10%);
+  }
+  .invertColor{
+    color: $lightFontColor;
+  }
+}
+.userForm {
+  overflow: visible;
+  .Select {
+    width: 100%;
+  }
+}
+.roleForm{
+  .overflowVisible{
+    overflow: visible;
+  }
+  .Select {
+    width: 100%;
+  }
+}
+.spacer{
+  min-width: 10px;
+}
+.languageFieldForm{
+  @extend .formBlock;
+  margin-top: 0 !important;
+}
+.formBlock{
+  margin-top: 8px;
+  padding: 20px;
+  margin-bottom: 40px;
+  background: $lightBlue;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+}
+.languageFlags{
+  display: flex;
+}
+.flagButton{
+  min-width: 95px;
+  background: $lightBlue;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px;
+  cursor: pointer;
+  opacity: 0.35;
+  color: #3a4a52;
+  border: 2px solid $lightBlue;
+  &.active{
+    opacity: 1;
+    border: 2px solid $primary;
+    &:hover{
+      background: $lightBlue;
+      border: 2px solid $lightBlue;
+      opacity: 1;
+    }
+  }
+  &:hover{
+    background: #B4C9D0;
+    border: 2px solid #B4C9D0;
+    opacity: 0.7;
+  }
+  .flagIcon{
+    opacity: 0.8;
+    margin-right: 10px;
+  }
+}
+.fullForm{
+  padding: 0 120px 100px 120px;
+  max-width: 900px;
+
+  .bottomDown {
+    margin-top: 40px;
+  }
+}
+.dropzone{
+  cursor: pointer;
+  .picture{
+    border: 2px dashed $borderColor;
+    margin-bottom: 10px;
+    min-height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-height: 250px;
+    overflow: hidden;
+    img{
+      max-width: 100%;
+    }
+  }
+  .changePhoto{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+  }
+  &:hover{
+    .button.secondary{
+      color: #FFF;
+      background-color: #B4C9D0;
+    }
+    .textButton{
+      text-decoration: underline;
+    }
+  }
+}
+.imageLibrary{
+  .placeholder{
+    border: 2px dashed $borderColor;
+    height: 170px;
+    max-height: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    cursor: pointer;
+    position: relative;
+    img{
+      max-width: 100%;
+      object-fit: cover;
+    }
+    .changePhoto{
+      display: flex;
+      justify-content: center;
+    }
+    &:hover{
+      .button.secondary{
+        color: #FFF;
+        background-color: #B4C9D0;
+      }
+      .textButton{
+        text-decoration: underline;
+      }
+    }
+  }
+  .libraryForm{
+    position: absolute;
+    right: 0;
+    width: calc(100% - 20px);
+    box-sizing: border-box;
+    background: $formBackground;
+    padding: 20px;
+    z-index: 100;
+    max-width: 60%;
+    min-height: 100%;
+    transition: all 0.2s ease-in-out;
+    .partitions{
+      display: flex;
+      flex-direction: column;
+    }
+    .uploadNew{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 10px;
+      min-height: 30px;
+      min-width: 300px;
+      margin: 10px 0;
+      border: 2px dashed $borderColor;
+      img{
+        max-width: 100px;
+        max-height: 100px;
+      }
+    }
+    .imageBlock{
+      display: flex;
+      border: 2px solid $primary;
+      height: 400px;
+      overflow: hidden;
+      position: relative;
+    }
+    .allImages{
+      display: flex;
+      flex-flow: row wrap;
+      overflow: auto;
+      .imageFile{
+        width: 70px;
+        height: 70px;
+        overflow: hidden;
+        margin: 3px;
+        border: 2px solid $borderColor;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        &.active{
+          border: 2px solid $accentColor;
+          box-shadow: 0 0 3px rgba(99, 14, 36, 0.55);
+          outline: 2px solid $accentColor;
+        }
+        img{
+          max-width: 100%;
+          object-fit: cover;
+        }
+      }
+      &.fullWidth{
+        width: 100%;
+      }
+    }
+    .imgAttributes{
+      display: flex;
+      align-items: center;
+      margin-top: 5px;
+      .deleteImageButton{
+        margin-top: 28px;
+        margin-left: 10px;
+      }
+    }
+    .imageFilename{
+      margin-left: auto;
+      margin-top: 15px;
+      font-size: 13px;
+      color: $primary;
+    }
+  }
+  &.smallFormat{
+    .placeholder{
+      max-height: 40px;
+      height: 40px;
+      .button{
+        padding: 2px 15px;
+        margin: 0;
+      }
+    }
+  }
+
+}
+.switchCheckBox {
+  position: relative;
+  line-height: 100%;
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+
+  label {
+    cursor: pointer;
+  }
+
+  input[type="checkbox"]:checked + label {
+    background-color: $primary;
+  }
+  input[type="checkbox"]:checked + label:after {
+    margin-left: 24px;
+    background-color: $primary;
+  }
+
+  input[type="checkbox"] {
+    position: absolute;
+    margin-left: -9999px;
+    visibility: hidden;
+  }
+
+  > label:first-child {
+    display: inline-block;
+    margin-right: 10px;
+  }
+
+  input[type="checkbox"] + label {
+    display: inline-block;
+    position: relative;
+    margin: 0;
+    outline: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 2px;
+    width: 48px;
+    height: 24px;
+    vertical-align: middle;
+    background-color: $lightPrimary;
+    -webkit-border-radius: 60px;
+    -moz-border-radius: 60px;
+    border-radius: 60px;
+    -webkit-transition: background 0.2s;
+    -moz-transition: background 0.2s;
+    -o-transition: background 0.2s;
+    transition: background 0.2s;
+    &:hover{
+      background-color: darken($lightPrimary,15%);
+    }
+  }
+
+  input[type="checkbox"] + label:before,
+   input[type="checkbox"] + label:after {
+    display: inline-block;
+    position: absolute;
+    content: "";
+  }
+
+  input[type="checkbox"] + label:before {
+    top: 2px;
+    left: 2px;
+    bottom: 2px;
+    right: 2px;
+    background-color: #fff;
+    -webkit-border-radius: 60px;
+    -moz-border-radius: 60px;
+    border-radius: 60px;
+    -webkit-transition: background 0.2s;
+    -moz-transition: background 0.2s;
+    -o-transition: background 0.2s;
+    transition: background 0.2s;
+  }
+
+  input[type="checkbox"] + label:after {
+    top: 4px;
+    left: 4px;
+    bottom: 4px;
+    width: 16px;
+    background-color: $lightPrimary;
+    -webkit-border-radius: 52px;
+    -moz-border-radius: 52px;
+    border-radius: 52px;
+    -webkit-transition: margin 0.4s, background 0.2s;
+    -moz-transition: margin 0.4s, background 0.2s;
+    -o-transition: margin 0.4s, background 0.2s;
+    transition: margin 0.4s, background 0.2s;
+  }
+
+  &.disabled{
+    label {
+      cursor: not-allowed;
+    }
+    input[type="checkbox"] + label {
+      background-color: #eee;
+    }
+    &:hover input[type="checkbox"] + label {
+      background-color: #eee;
+    }
+    input[type="checkbox"] + label:after {
+      background-color: #d5d5d5;
+    }
+    input[type="checkbox"]:checked + label:after {
+      margin-left: 24px;
+      background-color: #d5d5d5;
+    }
+    input[type="checkbox"]:checked + label {
+      background-color: #eee;
+    }
+  }
+
+}
+.dragHandle {
+  background: #D7D7D7;
+  width: 10px;
+  height: 100%;
+  cursor: move;
+  @include dotted(#b5c9d2);
+}
+
+.bold{
+  font-weight: bold;
+}
+
+.markdownEditor{
+
+  .CodeMirror{
+   height: 200px;
+  }
+
+  &.small{
+    .CodeMirror{
+      height: 100px;
+    }
+  }
+
+  .preview{
+    margin-top: 60px;
+    padding: 5px 10px;
+    background: #FFF;
+  }
+
+  .MDEditor_editor {
+    border: 1px solid #ccc;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .MDEditor_toolbar {
+    margin-bottom: 5px;
+  }
+
+  .MDEditor_toolbarButton {
+    opacity: 0.9;
+    background: $lightPrimary;
+    cursor: pointer;
+    display: inline-block;
+    margin-right: 4px;
+    text-align: center;
+    padding: 3px 1px 1px 1px;
+    vertical-align: middle;
+    transition: all 180ms;
+    -webkit-transition: all 180ms;
+    width: 35px;
+    height: 31px;
+    &:hover,
+    &:focus {
+      background-color: darken($lightPrimary, 5%);
+      opacity: 1;
+    }
+  }
+
+  .MDEditor_toolbarButton:active,
+  .MDEditor_toolbarButton--pressed {
+    background-color: darken($lightPrimary, 18%);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.3);
+
+    &:hover {
+      background: darken($lightPrimary, 12%);
+    }
+  }
+
+  .MDEditor_toolbarButton_icon {
+    display: inline-block;
+    height: 16px;
+    width: 16px;
+    opacity: 0.7;
+    color: #000;
+    > svg {
+      height: 16px;
+      width: 16px;
+    }
+  }
+
+  .MDEditor_toolbarButton_label {
+    display: none;
+  }
+
+  .MDEditor_toolbarButton_label-icon {
+    display: inline-block;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: .9;
+    height: 16px;
+    text-transform: uppercase;
+    color: rgba(37, 38, 43, 0.79);
+  }
+
+  .showButtonWrap{
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+    .showPreviewButton{
+      position: absolute;
+      top:-1px;
+      right:0;
+    }
+  }
+}
+
+@media print and (orientation: portrait) {
+  .topBar{
+    display: none;
+  }
+  .mainMenu{
+    display: none;
+  }
+  .contextMenu{
+    display: none;
+  }
+  .content.menuOpen .subContent {
+    padding-left: 0px;
+  }
+}
+@media (max-width: 700px) {
+  .fullForm{
+    padding: 0 10px 10px 10px;
+  }
+}
+
+
+[data-tooltip] {
+  position: relative;
+  z-index: 2;
+}
+/* Hide the tooltip content by default */
+[data-tooltip]:before,
+[data-tooltip]:after {
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+/* Position tooltip above the element */
+[data-tooltip]:before {
+  position: absolute;
+  bottom: 120%;
+  left: 50%;
+  margin-bottom: 5px;
+  margin-left: -50px;
+  padding: 7px;
+  min-width: 90px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  background-color: #000;
+  background-color: hsla(0, 0%, 20%, 0.9);
+  color: #fff;
+  content: attr(data-tooltip);
+  text-align: center;
+  font-size: 12px;
+  line-height: 1.2;
+  z-index: 999;
+}
+/* Triangle hack to make tooltip look like a speech bubble */
+[data-tooltip]:after {
+  position: absolute;
+  bottom: 120%;
+  left: 50%;
+  margin-left: -5px;
+  width: 0;
+  border-top: 5px solid #000;
+  border-top: 5px solid hsla(0, 0%, 20%, 0.9);
+  border-right: 5px solid transparent;
+  border-left: 5px solid transparent;
+  content: " ";
+  font-size: 0;
+  line-height: 0;
+}
+/* Show tooltip content on hover */
+[data-tooltip]:hover:before,
+[data-tooltip]:hover:after {
+  visibility: visible;
+  opacity: 1;
+}

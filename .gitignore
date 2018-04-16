@@ -1,0 +1,8 @@
+.DS_Store
+.idea/
+node_modules
+backend/config/env/development.js
+backend/dist/*
+public/assets
+frontend/tests
+npm-debug.log

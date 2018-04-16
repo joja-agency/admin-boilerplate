@@ -1,0 +1,13 @@
+{
+  "presets": ["react", "stage-2"],
+  "env": {
+    "development": {
+      "presets": ["react-hmre", "stage-2"]
+    },
+    "test": {
+      "presets": [["es2015"], "react"]
+    }
+  },
+
+  "plugins": ["transform-regenerator"]
+}
